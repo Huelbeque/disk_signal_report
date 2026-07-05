@@ -51,17 +51,10 @@ The VBScript starts the application without displaying the PowerShell console wi
 
 ## Project Status
 
-This project is actively being improved.
+This project has reached its initial stable release and is ready for everyday use.
 
-### Planned features
+Future updates will focus on improvements, optimizations, and new features when needed.
 
-* Export reports
-* Better Signal media classification
-* Network quality statistics
-* Packet loss detection
-* Jitter calculation
-* Automatic update checker
-* Executable (.exe) release
 
 ## License
 
