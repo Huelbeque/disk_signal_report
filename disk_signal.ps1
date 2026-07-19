@@ -144,7 +144,7 @@ $drives = Get-PSDrive -PSProvider FileSystem | ForEach-Object {
             <TextBlock FontSize="20" Name="SignalTotal"/>
             <ListBox FontSize="20" Name="SignalList"/>
 
-            <Button Name="ClearLargeMediaBtn" FontSize="30"  Content="Очистити великі кеш Signal" Height="45" Margin="0,10,0,0"/>
+            <Button Name="ClearLargeMediaBtn" FontSize="30"  Content="Очистити великі і кеш Signal" Height="45" Margin="0,10,0,0"/>
             <Button Name="ClearOldFilesBtn" FontSize="30" Content="Очистити файли старші за 30 днів" Height="45" Margin="0,5,0,0"/>
 
             <Button Name="PingBtn"
