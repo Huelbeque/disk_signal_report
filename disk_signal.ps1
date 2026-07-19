@@ -108,7 +108,7 @@ $drives = Get-PSDrive -PSProvider FileSystem | ForEach-Object {
 # =========================
 [xml]$xaml = @"
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        Title="Утілита перевірок пінгів, диска та Signal" Height="740" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Утілита перевірок пінгів, диска та Signal V2" Height="740" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid Margin="10">
 
@@ -144,7 +144,7 @@ $drives = Get-PSDrive -PSProvider FileSystem | ForEach-Object {
             <TextBlock FontSize="20" Name="SignalTotal"/>
             <ListBox FontSize="20" Name="SignalList"/>
 
-            <Button Name="ClearLargeMediaBtn" FontSize="30"  Content="Очистити великі медіафайли Signal" Height="45" Margin="0,10,0,0"/>
+            <Button Name="ClearLargeMediaBtn" FontSize="30"  Content="Очистити великі кеш Signal" Height="45" Margin="0,10,0,0"/>
             <Button Name="ClearOldFilesBtn" FontSize="30" Content="Очистити файли старші за 30 днів" Height="45" Margin="0,5,0,0"/>
 
             <Button Name="PingBtn"
@@ -261,7 +261,7 @@ $closeBtn.Add_Click({
 $clearBtn.Add_Click({
 
     $result = [System.Windows.MessageBox]::Show(
-        "Ви впевнені, що хочете видалити файли?",
+        "Ви впевнені, що хочете видалити файли великі і кеш?",
         "Підтвердження дії",
         "YesNo",
         "Warning"
@@ -278,6 +278,14 @@ $clearBtn.Add_Click({
     $files = Get-ChildItem $signalPath -Recurse -File -ErrorAction SilentlyContinue
 
     foreach ($f in $files) {
+
+        # Спочатку видаляємо все з attachments.noindex
+        if ($f.FullName -match "\\attachments\.noindex\\") {
+            try {
+                Remove-Item $f.FullName -Force -ErrorAction SilentlyContinue
+            } catch {}
+            continue
+        }
 
         $cat = Get-FileCategory $f
 
